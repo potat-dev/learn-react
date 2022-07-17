@@ -1,20 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import TodoList from './TodoList';
+import TodoList from './components/TodoList';
+import NewTaskForm from './components/NewTaskForm';
+import Alert from 'react-bootstrap/Alert';
 import { v4 as uuidv4 } from 'uuid';
-
-// import logo from './logo.svg';
-// import './App.css';
 
 const LOCAL_STORAGE_KEY = 'todoApp.todos';
 
 function App() {
-  const [todos, setTodos] = useState(
-    [
-      // { id: 1, text: 'Learn React', completed: false },
-      // { id: 2, text: 'Learn Vue', completed: false },
-      // { id: 3, text: 'Learn Angular', completed: false },
-    ]
-  );
+  const [todos, setTodos] = useState([]);
 
   function toggleTodo(id) {
     const newTodos = [...todos]
@@ -47,14 +40,16 @@ function App() {
     setTodos(newTodos);
   }
 
+  var completedTodos = todos.filter(todo => !todo.completed).length
+  var alertColor = completedTodos ? 'primary' : 'success'
+  completedTodos = completedTodos ? completedTodos : 'no'
+
   return (
-    <>
-      <input type="text" ref={todoNameRef} />
-      <button onClick={addHandler}>Add</button>
-      <button onClick={clearHandler}>Delete</button>
-      <div>{todos.filter(todo => !todo.completed).length} left to do</div>
+    <div style={{ padding: '16px' }}>
+      <NewTaskForm onAdd={addHandler} onDelete={clearHandler} label_ref={todoNameRef} />
+      <Alert variant={alertColor}>You have {completedTodos} tasks to do</Alert>
       <TodoList todos={todos} toggleTodo={toggleTodo} />
-    </>
+    </div>
   )
 }
 
