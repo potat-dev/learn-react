@@ -15,15 +15,8 @@ export default function Todo({ todo, toggleTodo }) {
         {todo.text}
       </div>
       <Badge bg={color} pill>
-        {todo.completed ? 'Done' : 'Not Done'}
+        {todo.completed ? 'Done' : ''}
       </Badge>
     </ListGroup.Item>
-
-    // <div>
-    //   <label>
-    //     <input type="checkbox" checked={todo.completed} onChange={handleTodoClick} />
-    //     {todo.text}
-    //   </label>
-    // </div>
   )
 }
