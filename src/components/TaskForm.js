@@ -4,10 +4,14 @@ import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 
 export default function NewTaskForm({ onAdd, onDelete, label_ref }) {
+  function handleSubmit(event) {
+    if (event.key === "Enter") onAdd()
+  }
+  
   return (
     <div style={{ marginBottom: '16px' }}>
       <Stack direction="horizontal" gap={3}>
-        <Form.Control ref={label_ref} className="me-auto" placeholder="Add new task..." />
+        <Form.Control ref={label_ref} className="me-auto" placeholder="Add new task..." onKeyPress={handleSubmit} />
         <Button variant="primary" onClick={onAdd}>Add</Button>
         <Button variant="danger" onClick={onDelete}>Clear</Button>
       </Stack>

@@ -10,13 +10,11 @@ export default function Todo({ todo, toggleTodo }) {
   }
 
   return (
-    <ListGroup.Item variant={item_color} as='li' className="d-flex justify-content-between align-items-start align-items-center" onClick={handleTodoClick}>
-      <div className="ms-2 me-auto">
-        {todo.text}
+    <ListGroup.Item variant={item_color} as='li' className="d-flex justify-content-between align-items-stretch" onClick={handleTodoClick}>
+      <div className="ms-2 me-auto text-break">{todo.text}</div>
+      <div className='ms-3 d-flex align-items-center'>
+        <Badge bg={color} pill>{todo.completed ? 'Done' : ''}</Badge>
       </div>
-      <Badge bg={color} pill>
-        {todo.completed ? 'Done' : ''}
-      </Badge>
     </ListGroup.Item>
   )
 }
